@@ -5,11 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.ItemsViewModel
 import com.example.myapplication.R
 
-class CustomAdapterTarction(private val mList: List<ItemsViewModel>) : RecyclerView.Adapter<CustomAdapterTarction.ViewHolder>() {
+class CustomAdapterTarction(private val mList: List<ItemsViewModel>,val listner: listner) : RecyclerView.Adapter<CustomAdapterTarction.ViewHolder>() {
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,6 +28,10 @@ class CustomAdapterTarction(private val mList: List<ItemsViewModel>) : RecyclerV
 
         holder.textView.text = ItemsViewModel.text
 
+        holder.cardview.setOnClickListener {
+            listner.onClickListner()
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -36,5 +41,6 @@ class CustomAdapterTarction(private val mList: List<ItemsViewModel>) : RecyclerV
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val imageView: ImageView = itemView.findViewById(R.id.imageView3)
         val textView: TextView = itemView.findViewById(R.id.textView5)
+        val  cardview: CardView=itemView.findViewById(R.id.cardview);
     }
 }

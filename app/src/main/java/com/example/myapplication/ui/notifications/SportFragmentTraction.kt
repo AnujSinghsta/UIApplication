@@ -5,13 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.ItemsViewModel
 import com.example.myapplication.R
 
 
-class SportFragmentTraction : Fragment() {
+class SportFragmentTraction : Fragment(),listner {
 
 
     override fun onCreateView(
@@ -31,11 +32,16 @@ class SportFragmentTraction : Fragment() {
             data.add(ItemsViewModel(R.drawable.storelogo, "Item " + i))
         }
 
-        val adapter = CustomAdapterTarction(data)
+        val adapter = CustomAdapterTarction(data,this)
 
         recyclerview.adapter = adapter
 
         return  view;
+    }
+
+    override fun onClickListner() {
+        findNavController().navigate(R.id.action_navigation_notifications_to_billDetailsFragment)
+
     }
 
 }

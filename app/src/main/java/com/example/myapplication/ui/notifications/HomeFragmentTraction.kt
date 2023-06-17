@@ -5,26 +5,33 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.ItemsViewModel
 import com.example.myapplication.R
 
 
-class HomeFragmentTraction : Fragment() {
+class HomeFragmentTraction : Fragment() ,listner{
+    var recyclerview: RecyclerView? =null;
 
+    override fun onStart() {
+        super.onStart()
+        ma();
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view= inflater.inflate(R.layout.fragment_home1, container, false)
+        val view= inflater.inflate(R.layout.fragment_home1, container, false)
 
+         recyclerview = view.findViewById<RecyclerView>(R.id.recyclerview)
+        recyclerview?.layoutManager = LinearLayoutManager(requireActivity())
+        return  view;
+    }
 
-        val recyclerview = view.findViewById<RecyclerView>(R.id.recyclerview)
-
-        recyclerview.layoutManager = LinearLayoutManager(requireActivity())
-
+    private fun  ma() {
         val data = ArrayList<ItemsViewModel>()
 
 
@@ -32,11 +39,15 @@ class HomeFragmentTraction : Fragment() {
             data.add(ItemsViewModel(R.drawable.downloadnew, "Item " + i))
         }
 
-        val adapter = CustomAdapterTarction(data)
-
-        recyclerview.adapter = adapter
-
-        return  view;
+        val adapter = CustomAdapterTarction(data ,this)
+        recyclerview?.adapter = adapter
     }
+
+    override fun onClickListner() {
+
+        findNavController().navigate(R.id.action_navigation_notifications_to_billDetailsFragment)
+
+    }
+
 
 }

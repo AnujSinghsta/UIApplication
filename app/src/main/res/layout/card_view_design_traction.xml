@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
+    android:id="@+id/cardview"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/background_storedetails"
     app:cardCornerRadius="10dp"

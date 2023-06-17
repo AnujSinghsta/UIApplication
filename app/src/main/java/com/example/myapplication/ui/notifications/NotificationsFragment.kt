@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
-import com.example.myapplication.MyAdapter
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentNotificationsBinding
 import com.google.android.material.tabs.TabLayout
@@ -23,6 +21,10 @@ class NotificationsFragment : Fragment() {
     var tabLayout: TabLayout? = null
     var viewPager: ViewPager? = null
 
+    override fun onStart() {
+        super.onStart()
+        viewpager()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +39,7 @@ class NotificationsFragment : Fragment() {
 
         tabLayout = root.findViewById<TabLayout>(R.id.tabLayout)
         viewPager = root.findViewById<ViewPager>(R.id.viewPager)
-        viewpager()
+
         return root
     }
 
@@ -49,14 +51,9 @@ class NotificationsFragment : Fragment() {
         tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
 
         val adapter = fragmentManager?.let {
-            MyAdapterTraction(
-                requireActivity(),
-                it,
-                tabLayout!!.tabCount
-            )
+            MyAdapterTraction(requireActivity(), it, tabLayout!!.tabCount)
         }
         viewPager!!.adapter = adapter
-
         viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
 
         tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
